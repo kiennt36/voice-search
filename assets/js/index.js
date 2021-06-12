@@ -70,6 +70,12 @@ const app = {
 				searchFormInput.value = ""
 		}
 
+		// Xử lý sự kiện khi submit form
+		searchForm.onsubmit = function (e) {
+			e.preventDefault()
+			console.log('ok')
+		}
+
 	},
 
 	micBtnClick: function () {
