@@ -88,6 +88,55 @@ header {
 	cursor: pointer;
 }
 
+.form-message {
+	position: absolute;
+	top: calc(100% + 10px);
+	left: 0;
+	right: 0;
+	height: auto;
+	font-size: 1.2rem;
+	color: #333;
+	padding: 10px;
+	opacity: 0;
+	visibility: hidden;
+	animation: dropDown .3s linear;
+}
+
+.form-message.active {
+	opacity: 1;
+	visibility: initial;
+	animation: upToTop .3s ease forwards;
+}
+
+@keyframes upToTop {
+	from {
+		transform: translateY(50%);
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+		visibility: initial;
+	}
+
+}
+
+@keyframes dropDown {
+	from {
+		transform: translateY(0);
+		opacity: 1;
+		visibility: initial;
+	}
+
+	to {
+		transform: translateY(50%);
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
 .copyright {
 	position: fixed;
 	bottom: 10px;

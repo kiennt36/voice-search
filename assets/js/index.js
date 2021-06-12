@@ -3,6 +3,7 @@ const $$ = document.querySelectorAll.bind(document)
 
 const searchForm = $('#form-search')
 const searchFormInput = $('#form-search .text-search')
+const searchFormMessage = $('#form-search .form-message')
 const SpeechRecognition = 
 		window.SpeechRecognition || window.webkitSpeechRecognition
 
@@ -29,21 +30,23 @@ const app = {
 	handleEvents: function () {
 		const _this = this
 
+		// Xét ngôn ngữ giọng nói
 		this.recognition.lang = 'vi-VN'
+
+		// Xét kết quả trả về liên tục cho mỗi lần nhận dạng giọng nói
 		this.recognition.continuous = true
 
+		// Xử lý xự kiện khi mic button được click
 		this.micBtn.onclick = function () {
 			_this.micBtnClick()
 		}
 
+		// Xử lý sự kiện khi bắt đầu nhận dạng giọng nói
 		this.recognition.onstart = function () {
 			_this.startSpeechRecognition()
 		}
 
-		this.recognition.onspeechend = function(event) {
-			console.log('Sound has stopped being received');
-		}
-
+		// Xử lý sự kiện khi kết thúc nhận dạng giọng nói
 		this.recognition.onend = function () {
 			_this.endSpeechRecognition()
 
@@ -57,6 +60,7 @@ const app = {
 			}
 		}
 
+		// Xử lý sự kiện khi có kết quả nhận dạng giọng nói
 		this.recognition.onresult = function (events) {
 			_this.resultOfSpeechRecognition(events)
 
@@ -81,6 +85,7 @@ const app = {
 		console.log('Speech Recognition Active')
 		searchFormInput.focus()
 		searchFormInput.placeholder = "Search Google..."
+		searchFormMessage.classList.add('active')
 		this.micIcon.classList.remove('fa-microphone')
 		this.micIcon.classList.add('fa-microphone-slash')
 		this.micIcon.classList.add('active')
@@ -89,6 +94,7 @@ const app = {
 	endSpeechRecognition: function () {
 		console.log('Speech Recognition Disabled')
 		searchFormInput.focus()
+		searchFormMessage.classList.remove('active')
 		this.micIcon.classList.add('fa-microphone')
 		this.micIcon.classList.remove('fa-microphone-slash')
 		this.micIcon.classList.remove('active')
